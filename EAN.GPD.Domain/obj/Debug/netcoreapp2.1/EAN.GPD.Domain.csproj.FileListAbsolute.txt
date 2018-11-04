@@ -1,0 +1,12 @@
+C:\projetos\EAN.GPD\EAN.GPD.Domain\bin\Debug\netcoreapp2.1\EAN.GPD.Domain.deps.json
+C:\projetos\EAN.GPD\EAN.GPD.Domain\bin\Debug\netcoreapp2.1\EAN.GPD.Domain.dll
+C:\projetos\EAN.GPD\EAN.GPD.Domain\bin\Debug\netcoreapp2.1\EAN.GPD.Domain.pdb
+C:\projetos\EAN.GPD\EAN.GPD.Domain\bin\Debug\netcoreapp2.1\EAN.GPD.Infrastructure.dll
+C:\projetos\EAN.GPD\EAN.GPD.Domain\bin\Debug\netcoreapp2.1\EAN.GPD.Infrastructure.pdb
+C:\projetos\EAN.GPD\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.csprojAssemblyReference.cache
+C:\projetos\EAN.GPD\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.csproj.CoreCompileInputs.cache
+C:\projetos\EAN.GPD\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.AssemblyInfoInputs.cache
+C:\projetos\EAN.GPD\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.AssemblyInfo.cs
+C:\projetos\EAN.GPD\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.csproj.CopyComplete
+C:\projetos\EAN.GPD\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.dll
+C:\projetos\EAN.GPD\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.pdb
