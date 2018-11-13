@@ -10,3 +10,15 @@ C:\projetos\EAN.GPD\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.Assemb
 C:\projetos\EAN.GPD\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.csproj.CopyComplete
 C:\projetos\EAN.GPD\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.dll
 C:\projetos\EAN.GPD\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.pdb
+C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Domain\bin\Debug\netcoreapp2.1\EAN.GPD.Domain.deps.json
+C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Domain\bin\Debug\netcoreapp2.1\EAN.GPD.Domain.dll
+C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Domain\bin\Debug\netcoreapp2.1\EAN.GPD.Domain.pdb
+C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Domain\bin\Debug\netcoreapp2.1\EAN.GPD.Infrastructure.dll
+C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Domain\bin\Debug\netcoreapp2.1\EAN.GPD.Infrastructure.pdb
+C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.csprojAssemblyReference.cache
+C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.csproj.CoreCompileInputs.cache
+C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.AssemblyInfoInputs.cache
+C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.AssemblyInfo.cs
+C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.csproj.CopyComplete
+C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.dll
+C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Domain\obj\Debug\netcoreapp2.1\EAN.GPD.Domain.pdb

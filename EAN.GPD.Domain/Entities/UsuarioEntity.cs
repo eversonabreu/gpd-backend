@@ -21,7 +21,7 @@ namespace EAN.GPD.Domain.Entities
         [JoinColumn("IdUsuarioGrupo")]
         public UsuarioGrupoEntity UsuarioGrupo { get; }
 
-        [Column(StringMaxLenght = 20, StringNotNullable = true)]
+        [Column(StringNotNullable = true)]
         public string SenhaLogin { get; set; }
 
         [Column(StringMaxLenght = 11, StringNotNullable = true)]
@@ -30,7 +30,7 @@ namespace EAN.GPD.Domain.Entities
         [Column(StringMaxLenght = 255, StringNotNullable = true)]
         public string Email { get; set; }
 
-        [Column(StringMaxLenght = 30, StringNotNullable = true)]
+        [Column(StringMaxLenght = 30)]
         public string Matricula { get; set; }
 
         [Column]
