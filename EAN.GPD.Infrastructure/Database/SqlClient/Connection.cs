@@ -11,7 +11,7 @@ namespace EAN.GPD.Infrastructure.Database.SqlClient
 
         public NpgsqlConnection GetConnection(bool startTransaction = false)
         {
-            connection = new NpgsqlConnection("User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=PGB;");
+            connection = new NpgsqlConnection(DatabaseProvider.ConnectionString);
             connection.Open();
 
             if (startTransaction)

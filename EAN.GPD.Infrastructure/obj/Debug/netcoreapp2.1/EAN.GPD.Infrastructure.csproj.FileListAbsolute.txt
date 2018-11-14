@@ -9,7 +9,6 @@ C:\projetos\EAN.GPD\EAN.GPD.Infrastructure\obj\Debug\netcoreapp2.1\EAN.GPD.Infra
 C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Infrastructure\bin\Debug\netcoreapp2.1\EAN.GPD.Infrastructure.deps.json
 C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Infrastructure\bin\Debug\netcoreapp2.1\EAN.GPD.Infrastructure.dll
 C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Infrastructure\bin\Debug\netcoreapp2.1\EAN.GPD.Infrastructure.pdb
-C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Infrastructure\obj\Debug\netcoreapp2.1\EAN.GPD.Infrastructure.csprojAssemblyReference.cache
 C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Infrastructure\obj\Debug\netcoreapp2.1\EAN.GPD.Infrastructure.csproj.CoreCompileInputs.cache
 C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Infrastructure\obj\Debug\netcoreapp2.1\EAN.GPD.Infrastructure.AssemblyInfoInputs.cache
 C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Infrastructure\obj\Debug\netcoreapp2.1\EAN.GPD.Infrastructure.AssemblyInfo.cs

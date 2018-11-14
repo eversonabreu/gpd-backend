@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using EAN.GPD.Domain.Utils;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
@@ -27,7 +28,7 @@ namespace EAN.GPD.Server
                     });
 
                 //[FIXO]
-                const string caminhoXmlDoc = @"C:\projetos\EAN.GPD\EAN.GPD.Server\bin\Debug\netcoreapp2.1\EAN.GPD.Server.xml";
+                const string caminhoXmlDoc = @"C:\projetos\GPD\gpd-backend\gpd-backend\EAN.GPD.Server\bin\Debug\netcoreapp2.1\EAN.GPD.Server.xml";
                 c.IncludeXmlComments(caminhoXmlDoc);
             });
         }
@@ -46,6 +47,10 @@ namespace EAN.GPD.Server
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "GPD - Gerenciamento Pelas Diretrizes");
             });
+
+            //[FIXO]
+            DatabaseConfiguration.ConnectionString = "User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=GPD;Pooling=true;";
+            DatabaseConfiguration.Migrate();
         }
     }
 }

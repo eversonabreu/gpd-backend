@@ -3,8 +3,10 @@ using System;
 
 namespace EAN.GPD.Infrastructure.Database
 {
-    public abstract class DatabaseProvider
+    public static class DatabaseProvider
     {
+        public static string ConnectionString;
+
         public static IQuery NewQuery(string command) => new Query(command);
 
         public static IPersistence NewPersistence(string command) => new Persistence(command);
@@ -32,6 +34,20 @@ namespace EAN.GPD.Infrastructure.Database
             }
 
             throw new Exception("Nenhum resultado foi obtido para o 'ID' informado.");
+        }
+
+        public static bool ExistsTable(string nameTable)
+        {
+            try
+            {
+                var query = NewQuery($"SELECT 1 FROM {nameTable} WHERE 1 = 2");
+                query.ExecuteQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
