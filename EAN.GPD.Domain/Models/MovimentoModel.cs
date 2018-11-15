@@ -1,10 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EAN.GPD.Domain.Models
 {
     public class MovimentoModel : BaseModel
     {
+        [NotMapped]
         public long? IdMovimento { get; set; }
 
         public override long? GetId() => IdMovimento;

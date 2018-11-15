@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 namespace EAN.GPD.Domain.Repositories
 {
-    internal class BaseRepository<TEntity> where TEntity : BaseEntity
+    internal class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
     {
         public IEnumerable<TEntity> Filter(string whereExpression = null)
         {
@@ -23,11 +23,21 @@ namespace EAN.GPD.Domain.Repositories
             return result;
         }
 
-        public IEnumerable<TEntity> Filter(uint page = 0, uint count = 10, string whereExpression = null)
+        private int CountRecords(string whereExpression = null)
         {
+            var objData = (TEntity)Activator.CreateInstance(typeof(TEntity), (long?)null);
+            string where = string.IsNullOrWhiteSpace(whereExpression) ? "1 = 1" : whereExpression;
+            var query = DatabaseProvider.NewQuery($"select count(1) qtd from {objData.GetNameTable()} where {where}");
+            query.ExecuteQuery();
+            return query.GetInt("QTD");
+        }
+
+        public (IEnumerable<TEntity>, int) Filter(uint page = 0, uint count = 10, string whereExpression = null)
+        {
+            int countRecords = CountRecords(whereExpression);
             string paginate = $"limit {count} offset ({page} * {count})";
             string where = string.IsNullOrWhiteSpace(whereExpression) ? $"1 = 1 {paginate}" : $"{whereExpression} {paginate}";
-            return Filter(where);
+            return (Filter(where), countRecords);
         }
 
         public TEntity Find(string whereExpression)

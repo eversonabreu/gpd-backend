@@ -92,13 +92,13 @@ namespace EAN.GPD.Domain.Entities
         public long IdUnidadeMedida { get; set; }
 
         [JoinColumn("IdUnidadeMedida")]
-        public UnidadeMedidaEntity UnidadeMedida { get; }
+        public UnidadeMedidaEntity UnidadeMedida { get; private set; }
 
         [Column]
         public long IdUsuarioResponsavel { get; set; }
 
         [JoinColumn("IdUsuarioResponsavel")]
-        public UsuarioEntity UsuarioResponsavel { get; }
+        public UsuarioEntity UsuarioResponsavel { get; private set; }
 
         [Column]
         public TipoPeriodicidade TipoPeriodicidade { get; set; }

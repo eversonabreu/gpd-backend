@@ -46,7 +46,7 @@ namespace EAN.GPD.Domain.Entities
                     {
                         object value = data[name];
 
-                        if (prop.GetType() == typeof(bool))
+                        if (prop.PropertyType == typeof(bool))
                         {
                             prop.SetValue(this, Convert.ToChar(value) == 'S');
                         }
@@ -67,13 +67,9 @@ namespace EAN.GPD.Domain.Entities
                     if (data.ContainsKey(name))
                     {
                         object value = data[name];
-                        if (value == DBNull.Value)
+                        if (value != DBNull.Value)
                         {
-                            prop.SetValue(this, null);
-                        }
-                        else
-                        {
-                            var newObjectJoin = Activator.CreateInstance(prop.GetType(), (long)value);
+                            var newObjectJoin = Activator.CreateInstance(prop.PropertyType, (long?)value);
                             prop.SetValue(this, newObjectJoin);
                         }
                     }

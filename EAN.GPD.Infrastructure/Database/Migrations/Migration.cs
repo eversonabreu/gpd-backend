@@ -14,10 +14,18 @@
                 CreateTableMunicipio();
                 InsereEstados();
                 InsereMunicipios();
+                CreateTabelaUsuario();
             }
+
+            var migrationBuilder = new MigrationBuilder(nameTableMigration);
+            migrationBuilder.Execute();
         }
 
-        private void CreateTableMigration() => DatabaseProvider.NewPersistence($"create table {nameTableMigration} (code int not null);").Execute();
+        private void CreateTableMigration()
+        {
+            DatabaseProvider.NewPersistence($"create table {nameTableMigration} (code int not null);").Execute();
+            DatabaseProvider.NewPersistence($"insert into {nameTableMigration} (code) values (1);").Execute();
+        }
 
         private void CreateTableAuditoria()
         {
@@ -5647,6 +5655,44 @@
             DatabaseProvider.NewPersistence("insert into Municipio (IdMunicipio, Nome, CodigoMunicipioIbge, IdEstado) values ((select nextval('SEQ_MUNICIPIO')), 'Pinto Bandeira',4314548, (select IdEstado from Estado where CodigoUfIbge = 43));").Execute();
             DatabaseProvider.NewPersistence("insert into Municipio (IdMunicipio, Nome, CodigoMunicipioIbge, IdEstado) values ((select nextval('SEQ_MUNICIPIO')), 'Pescaria Brava',4212650, (select IdEstado from Estado where CodigoUfIbge = 42));").Execute();
             DatabaseProvider.NewPersistence("insert into Municipio (IdMunicipio, Nome, CodigoMunicipioIbge, IdEstado) values ((select nextval('SEQ_MUNICIPIO')), 'Balneário Rincão',4220000, (select IdEstado from Estado where CodigoUfIbge = 42));").Execute();
+        }
+
+        private void CreateTabelaUsuario()
+        {
+            //[FIXO] (Alterar senha usuário admin)
+            DatabaseProvider.NewPersistence(@"create table UsuarioGrupo (
+                                            IdUsuarioGrupo bigint not null,
+                                            Codigo int not null,
+                                            Descricao varchar(255) not null,
+                                            constraint PkUsuarioGrupo primary key (IdUsuarioGrupo),
+                                            constraint UkUsuarioGrupo unique (Codigo)
+                                            );
+
+                                            create sequence SeqUsuarioGrupo start with 2 increment by 1;
+
+                                            insert into UsuarioGrupo(IdUsuarioGrupo, Codigo, Descricao) values (1, 1, 'Administradores');
+
+                                            create table Usuario (
+                                            IdUsuario bigint not null,
+                                            Login varchar(30) not null,
+                                            Nome varchar(150) not null,
+                                            Ativo varchar(1) not null,
+                                            Administrador varchar(1) not null,
+                                            IdUsuarioGrupo bigint not null,
+                                            SenhaLogin text not null,
+                                            Cpf varchar(11) not null,
+                                            Email varchar(255) not null,
+                                            Matricula varchar(30),
+                                            ValorPesoIndividual decimal(15,2),
+                                            ValorPesoCorporativo decimal(15,2),
+                                            constraint PkUsuario primary key (IdUsuario),
+                                            constraint UkUsuario unique (Login),
+                                            constraint FkUsuarioGrupoUsuario foreign key (IdUsuarioGrupo) references UsuarioGrupo(IdUsuarioGrupo)
+                                            );
+
+                                            create sequence SeqUsuario start with 2 increment by 1;
+
+                                            insert into Usuario(IdUsuario, Login, Nome, Ativo, Administrador, IdUsuarioGrupo, SenhaLogin, Cpf, Email) values (1, 'admin', 'ADMINISTRADOR', 'S', 'S', 1, '1234', '87533063767', 'admin@gpd.com');").Execute();
         }
     }
 }

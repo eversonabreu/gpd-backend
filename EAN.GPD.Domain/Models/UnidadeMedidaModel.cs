@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EAN.GPD.Domain.Models
 {
     public class UnidadeMedidaModel : BaseModel
     {
+        [NotMapped]
         public long? IdUnidadeMedida { get; set; }
 
         public override long? GetId() => IdUnidadeMedida;

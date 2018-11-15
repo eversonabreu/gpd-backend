@@ -57,24 +57,24 @@ namespace EAN.GPD.Domain.Entities
         public long? IdArvoreSuperior { get; set; }
 
         [JoinColumn("IdArvoreSuperior")]
-        public ArvoreEntity ArvoreSuperior { get; }
+        public ArvoreEntity ArvoreSuperior { get; private set; }
 
         [JoinColumn("IdProjeto")]
-        public ProjetoEntity Projeto { get; }
+        public ProjetoEntity Projeto { get; private set; }
 
         [JoinColumn("IdIndicador")]
-        public IndicadorEntity Indicador { get; }
+        public IndicadorEntity Indicador { get; private set; }
 
         [JoinColumn("IdDepartamento")]
-        public DepartamentoEntity Departamento { get; }
+        public DepartamentoEntity Departamento { get; private set; }
 
         [JoinColumn("IdUsuarioGrupo")]
-        public UsuarioGrupoEntity UsuarioGrupo { get; }
+        public UsuarioGrupoEntity UsuarioGrupo { get; private set; }
 
         [JoinColumn("IdUsuario")]
-        public UsuarioEntity Usuario { get; }
+        public UsuarioEntity Usuario { get; private set; }
 
         [JoinColumn("IdCargo")]
-        public CargoEntity Cargo { get; }
+        public CargoEntity Cargo { get; private set; }
     }
 }

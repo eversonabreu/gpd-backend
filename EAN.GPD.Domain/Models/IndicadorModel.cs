@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EAN.GPD.Domain.Models
 {
     public class IndicadorModel : BaseModel
     {
+        [NotMapped]
         public long? IdIndicador { get; set; }
 
         public override long? GetId() => IdIndicador;

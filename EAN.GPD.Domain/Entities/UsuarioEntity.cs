@@ -16,10 +16,16 @@ namespace EAN.GPD.Domain.Entities
         public string Nome { get; set; }
 
         [Column]
+        public bool Ativo { get; set; }
+
+        [Column]
+        public bool Administrador { get; set; }
+
+        [Column]
         public long IdUsuarioGrupo { get; set; }
 
         [JoinColumn("IdUsuarioGrupo")]
-        public UsuarioGrupoEntity UsuarioGrupo { get; }
+        public UsuarioGrupoEntity UsuarioGrupo { get; private set; }
 
         [Column(StringNotNullable = true)]
         public string SenhaLogin { get; set; }

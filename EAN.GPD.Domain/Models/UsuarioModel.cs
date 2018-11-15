@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EAN.GPD.Domain.Models
 {
     public class UsuarioModel : BaseModel
     {
+        [NotMapped]
         public long? IdUsuario { get; set; }
 
         public override long? GetId() => IdUsuario;
@@ -15,6 +17,12 @@ namespace EAN.GPD.Domain.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "O nome do usuário é obrigatório.")]
         [StringLength(maximumLength: 30, ErrorMessage = "O nome do usuário não pode conter mais do que 150 caracteres.")]
         public string Nome { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "O campo ativo do usuário é obrigatório.")]
+        public bool Ativo { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "O campo administrador do usuário é obrigatório.")]
+        public bool Administrador { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "O ID de usuário grupo é obrigatório.")]
         [Range(minimum: 1, maximum: long.MaxValue,ErrorMessage = "O ID de usuário grupo é inválido.")]

@@ -26,9 +26,9 @@ namespace EAN.GPD.Domain.Entities
         public decimal ValorRealizado { get; set; }
 
         [JoinColumn("IdProjeto")]
-        public ProjetoEntity Projeto { get; }
+        public ProjetoEntity Projeto { get; private set; }
 
         [JoinColumn("IdIndicador")]
-        public IndicadorEntity Indicador { get; }
+        public IndicadorEntity Indicador { get; private set; }
     }
 }
