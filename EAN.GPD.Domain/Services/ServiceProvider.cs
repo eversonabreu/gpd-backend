@@ -9,6 +9,13 @@ namespace EAN.GPD.Domain.Services
         {
             services.AddTransient<IDepartamentoRepository, DepartamentoRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            services.AddTransient<ICargoRepository, CargoRepository>();
+            services.AddTransient<IProjetoRepository, ProjetoRepository>();
+            services.AddTransient<IArvoreRepository, ArvoreRepository>();
+            services.AddTransient<IUnidadeMedidaRepository, UnidadeMedidaRepository>();
+            services.AddTransient<IUsuarioGrupoRepository, UsuarioGrupoRepository>();
+            services.AddTransient<IIndicadorRepository, IndicadorRepository>();
+            services.AddTransient<IMovimentoRepository, MovimentoRepository>();
         }
     }
 }

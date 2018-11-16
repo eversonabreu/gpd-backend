@@ -5,10 +5,12 @@ using EAN.GPD.Domain.Utils;
 using EAN.GPD.Infrastructure.Database;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace EAN.GPD.Server.Controllers
 {
@@ -30,6 +32,8 @@ namespace EAN.GPD.Server.Controllers
             }
         }
 
+        protected UserLogged UserLogged { get => userLogged; }
+
         protected virtual void BeforePost(TModel model) { }
 
         protected virtual void BeforePut(TModel model) { }
@@ -47,7 +51,7 @@ namespace EAN.GPD.Server.Controllers
             BeforePost(model);
             TEntity entity = model.ToEntity<TEntity>();
             long result = entity.Save();
-            //Gerar auditoria...
+            Task.Run(() => repository.GenerateAuditAsync(TypeAudit.Insert, entity.GetNameTable(), result, userLogged));
             return result;
         }
 
@@ -64,10 +68,11 @@ namespace EAN.GPD.Server.Controllers
             }
 
             BeforePut(model);
-            // TEntity oldEntity = GetOne(model.GetId().Value);
+            TEntity oldEntity = GetOne(model.GetId().Value);
+            string jsonEntity = JsonConvert.SerializeObject(oldEntity);
             TEntity entity = model.ToEntity<TEntity>();
-            long result = entity.Save();
-            //Gerar auditoria...
+            entity.Save();
+            Task.Run(() => repository.GenerateAuditAsync(TypeAudit.Update, entity.GetNameTable(), model.GetId().Value, userLogged, jsonEntity));
         }
 
         [HttpDelete]
@@ -75,9 +80,10 @@ namespace EAN.GPD.Server.Controllers
         public virtual void Delete(long id)
         {
             BeforeDelete(id);
-            // TEntity oldEntity = GetOne(model.GetId().Value);
+            TEntity oldEntity = GetOne(id);
+            string jsonEntity = JsonConvert.SerializeObject(oldEntity);
             BaseEntity.Delete<TEntity>(id);
-            //Gerar auditoria...
+            Task.Run(() => repository.GenerateAuditAsync(TypeAudit.Delete, oldEntity.GetNameTable(), id, userLogged, jsonEntity));
         }
 
         [HttpGet]

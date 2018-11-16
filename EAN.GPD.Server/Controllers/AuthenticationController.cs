@@ -1,5 +1,6 @@
 ﻿using EAN.GPD.Domain.Repositories;
 using EAN.GPD.Domain.Utils;
+using EAN.GPD.Infrastructure.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -47,7 +48,7 @@ namespace EAN.GPD.Server.Controllers
         public string GetToken()
         {
             var usuario = repository.Find($"Login = '{login}'");
-            if (usuario != null && usuario.Ativo && usuario.SenhaLogin == password)
+            if (usuario != null && usuario.Ativo && Criptografia.Descodificar(usuario.SenhaLogin) == password)
             {
                 return GeradorToken.GetToken(usuario.IdUsuario);
             }

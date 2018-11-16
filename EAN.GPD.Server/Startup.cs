@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -13,6 +14,19 @@ namespace EAN.GPD.Server
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration { get; }
+
+        public Startup(IHostingEnvironment env)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
@@ -48,18 +62,16 @@ namespace EAN.GPD.Server
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseStaticFiles();
             app.UseMvc();
+            app.UseStaticFiles();
             app.UseStatusCodePages();
-
             app.UseSwagger();
             app.UseSwaggerUI(sgw =>
             {
                 sgw.SwaggerEndpoint("/swagger/v1/swagger.json", "GPD - Gerenciamento Pelas Diretrizes");
             });
-
-            //[FIXO]
-            DatabaseConfiguration.ConnectionString = "User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=GPD;Pooling=true;";
+            
+            DatabaseConfiguration.ConnectionString = Configuration.GetSection("DatabaseConnection").Value;
             DatabaseConfiguration.Migrate();
         }
     }

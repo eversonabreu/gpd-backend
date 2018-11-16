@@ -85,14 +85,17 @@ namespace EAN.GPD.Domain.Utils
                     throw new Exception("Token expirado.");
                 }
 
-                var query = DatabaseProvider.NewQuery($"select count(1) qtd from usuario where idusuario = {userLogged.IdUsuario} and ativo = 'S'");
+                var query = DatabaseProvider.NewQuery($"select administrador, cpf, matricula from usuario where idusuario = {userLogged.IdUsuario} and ativo = 'S'");
                 query.ExecuteQuery();
 
-                if (query.GetInt("QTD") == 0)
+                if (!query.IsNotEmpty)
                 {
                     throw new Exception("Usuário inexistente.");
                 }
 
+                userLogged.Administrador = query.GetBoolean("ADMINISTRADOR");
+                userLogged.Cpf = query.GetString("CPF");
+                userLogged.Matricula = query.GetStringOrNull("MATRICULA");
                 return true;
             }
             catch

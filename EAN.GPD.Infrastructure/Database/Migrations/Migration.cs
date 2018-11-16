@@ -1,4 +1,6 @@
-﻿namespace EAN.GPD.Infrastructure.Database.Migrations
+﻿using EAN.GPD.Infrastructure.Utils;
+
+namespace EAN.GPD.Infrastructure.Database.Migrations
 {
     public class Migration
     {
@@ -5659,7 +5661,7 @@
 
         private void CreateTabelaUsuario()
         {
-            //[FIXO] (Alterar senha usuário admin)
+            string senhaAdmin = Criptografia.Codificar("admin");
             DatabaseProvider.NewPersistence(@"create table UsuarioGrupo (
                                             IdUsuarioGrupo bigint not null,
                                             Codigo int not null,
@@ -5692,7 +5694,7 @@
 
                                             create sequence SeqUsuario start with 2 increment by 1;
 
-                                            insert into Usuario(IdUsuario, Login, Nome, Ativo, Administrador, IdUsuarioGrupo, SenhaLogin, Cpf, Email) values (1, 'admin', 'ADMINISTRADOR', 'S', 'S', 1, '1234', '87533063767', 'admin@gpd.com');").Execute();
+                                            insert into Usuario(IdUsuario, Login, Nome, Ativo, Administrador, IdUsuarioGrupo, SenhaLogin, Cpf, Email) values (1, 'admin', 'ADMINISTRADOR', 'S', 'S', 1, '" + senhaAdmin + "', '87533063767', 'admin@gpd.com');").Execute();
         }
     }
 }
