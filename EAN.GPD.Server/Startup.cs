@@ -1,4 +1,5 @@
 ﻿using EAN.GPD.Domain.Utils;
+using EAN.GPD.Server.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -62,6 +63,7 @@ namespace EAN.GPD.Server
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseMiddleware(typeof(HandlingMiddleware));
             app.UseMvc();
             app.UseStaticFiles();
             app.UseStatusCodePages();

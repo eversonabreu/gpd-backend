@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>EAN.GPD.Server</name>
+        <name>ean.gpd.server</name>
     </assembly>
     <members>
     </members>
