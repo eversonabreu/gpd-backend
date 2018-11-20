@@ -5,7 +5,9 @@ namespace EAN.GPD.Domain.Entities
 {
     public class MovimentoEntity : BaseEntity
     {
-        public MovimentoEntity(long? idMovimento = null) : base("Movimento", idMovimento) {}
+        private const string tableName = "Movimento";
+        public MovimentoEntity(long idUsuario) : base(tableName, idUsuario) { }
+        public MovimentoEntity() : base(tableName) { }
 
         [Column]
         public long IdMovimento { get; set; }

@@ -59,7 +59,9 @@ namespace EAN.GPD.Domain.Entities
 
     public class IndicadorEntity : BaseEntity
     {
-        public IndicadorEntity(long? idIndicador = null) : base("Indicador", idIndicador) {}
+        private const string tableName = "Indicador";
+        public IndicadorEntity(long idUsuario) : base(tableName, idUsuario) { }
+        public IndicadorEntity() : base(tableName) { }
 
         [Column]
         public long IdIndicador { get; set; }

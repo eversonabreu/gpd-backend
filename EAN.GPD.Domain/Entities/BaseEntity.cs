@@ -69,7 +69,7 @@ namespace EAN.GPD.Domain.Entities
                         object value = data[name];
                         if (value != DBNull.Value)
                         {
-                            var newObjectJoin = Activator.CreateInstance(prop.PropertyType, (long?)value);
+                            var newObjectJoin = Activator.CreateInstance(prop.PropertyType, Convert.ToInt64(value));
                             prop.SetValue(this, newObjectJoin);
                         }
                     }
@@ -157,7 +157,7 @@ namespace EAN.GPD.Domain.Entities
 
         public static void Delete<TEntity>(long id) where TEntity : BaseEntity
         {
-            var entity = (TEntity)Activator.CreateInstance(typeof(TEntity), (long?)null);
+            var entity = (TEntity)Activator.CreateInstance(typeof(TEntity));
             string nameTable = entity.GetNameTable();
             string namePrimaryKey = entity.GetNamePrimaryKey();
             var persistence = DatabaseProvider.NewPersistenceEntity(TypePersistence.Delete, nameTable, namePrimaryKey, id);
@@ -166,7 +166,7 @@ namespace EAN.GPD.Domain.Entities
 
         public static long GetSequence<TEntity>() where TEntity : BaseEntity
         {
-            var entity = (TEntity)Activator.CreateInstance(typeof(TEntity), (long?)null);
+            var entity = (TEntity)Activator.CreateInstance(typeof(TEntity));
             return DatabaseProvider.NewSequence(entity.GetNameSequence());
         }
     }

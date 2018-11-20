@@ -19,7 +19,7 @@ namespace EAN.GPD.Domain.Repositories
     {
         public IEnumerable<TEntity> Filter(string whereExpression = null)
         {
-            var objData = (TEntity)Activator.CreateInstance(typeof(TEntity), (long?)null);
+            var objData = (TEntity)Activator.CreateInstance(typeof(TEntity));
             string where = string.IsNullOrWhiteSpace(whereExpression) ? "1 = 1" : whereExpression;
             var query = DatabaseProvider.NewQuery($"select {objData.GetNamePrimaryKey()} id from {objData.GetNameTable()} where {where}");
             query.ExecuteQuery();
@@ -36,7 +36,7 @@ namespace EAN.GPD.Domain.Repositories
 
         private int CountRecords(string whereExpression = null)
         {
-            var objData = (TEntity)Activator.CreateInstance(typeof(TEntity), (long?)null);
+            var objData = (TEntity)Activator.CreateInstance(typeof(TEntity));
             string where = string.IsNullOrWhiteSpace(whereExpression) ? "1 = 1" : whereExpression;
             var query = DatabaseProvider.NewQuery($"select count(1) qtd from {objData.GetNameTable()} where {where}");
             query.ExecuteQuery();
@@ -58,7 +58,7 @@ namespace EAN.GPD.Domain.Repositories
                 throw new ArgumentNullException(nameof(whereExpression));
             }
 
-            var objData = (TEntity)Activator.CreateInstance(typeof(TEntity), (long?)null);
+            var objData = (TEntity)Activator.CreateInstance(typeof(TEntity));
             var query = DatabaseProvider.NewQuery($"select {objData.GetNamePrimaryKey()} id from {objData.GetNameTable()} where {whereExpression} limit 1");
             query.ExecuteQuery();
             if (query.IsNotEmpty)

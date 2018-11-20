@@ -15,7 +15,9 @@ namespace EAN.GPD.Domain.Entities
 
     public class ArvoreEntity : BaseEntity
     {
-        public ArvoreEntity(long? idArvore = null) : base("Arvore", idArvore) {}
+        private const string tableName = "Arvore";
+        public ArvoreEntity(long idUsuario) : base(tableName, idUsuario) {}
+        public ArvoreEntity() : base(tableName) {}
 
         [Column]
         public long IdArvore { get; set; }

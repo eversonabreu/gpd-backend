@@ -1,6 +1,7 @@
 ﻿using EAN.GPD.Infrastructure.Database;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading;
 
@@ -70,7 +71,7 @@ namespace EAN.GPD.Domain.Utils
             string[] colunas = token.Split(separador);
             return new UserLogged
             {
-                DataGeracaoToken = DateTime.Parse(colunas[2]),
+                DataGeracaoToken = DateTime.ParseExact(colunas[2], "yyyyMMddHHmmssfff", CultureInfo.InvariantCulture),
                 IdUsuario = long.Parse(colunas[3])
             };
         }

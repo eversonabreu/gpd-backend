@@ -4,7 +4,9 @@ namespace EAN.GPD.Domain.Entities
 {
     public class UnidadeMedidaEntity : BaseEntity
     {
-        public UnidadeMedidaEntity(long? idUnidadeMedida = null) : base("UnidadeMedida", idUnidadeMedida) {}
+        private const string tableName = "UnidadeMedida";
+        public UnidadeMedidaEntity(long idUsuario) : base(tableName, idUsuario) { }
+        public UnidadeMedidaEntity() : base(tableName) { }
 
         [Column]
         public long IdUnidadeMedida { get; set; }

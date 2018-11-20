@@ -4,7 +4,9 @@ namespace EAN.GPD.Domain.Entities
 {
     public class CargoEntity : BaseEntity
     {
-        public CargoEntity(long? idCargo = null) : base("Cargo", idCargo) {}
+        private const string tableName = "Cargo";
+        public CargoEntity(long idUsuario) : base(tableName, idUsuario) {}
+        public CargoEntity() : base(tableName) {}
 
         [Column]
         public long IdCargo { get; set; }

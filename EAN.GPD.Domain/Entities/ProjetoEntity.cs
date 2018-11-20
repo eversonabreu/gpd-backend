@@ -5,7 +5,9 @@ namespace EAN.GPD.Domain.Entities
 {
     public class ProjetoEntity : BaseEntity
     {
-        public ProjetoEntity(long? idProjeto = null) : base("Projeto", idProjeto) {}
+        private const string tableName = "Projeto";
+        public ProjetoEntity(long idUsuario) : base(tableName, idUsuario) { }
+        public ProjetoEntity() : base(tableName) { }
 
         [Column]
         public long IdProjeto { get; set; }
