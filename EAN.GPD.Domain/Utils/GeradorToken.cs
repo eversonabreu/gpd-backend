@@ -44,7 +44,8 @@ namespace EAN.GPD.Domain.Utils
             char charMinusculo1 = (char)new Random().Next(97, 122);
             int numeroAletorioComplementar = new Random().Next(-57852, 99685);
             char charMinusculo2 = (char)new Random().Next(97, 122);
-            return $"{charMaiusculo1}{charEspecial}{sb.ToString()}{separdor}{numeroAleatorio}{separdor}{dataCorrente}{separdor}{idUsuario}{separdor}{charMaiusculo2}{charMinusculo1}{numeroAletorioComplementar}{charMinusculo2}";
+            string result = $"{charMaiusculo1}{charEspecial}{sb.ToString()}{separdor}{numeroAleatorio}{separdor}{dataCorrente}{separdor}{idUsuario}{separdor}{charMaiusculo2}{charMinusculo1}{numeroAletorioComplementar}{charMinusculo2}";
+            return Convert.ToBase64String(new UTF8Encoding().GetBytes(result));
         }
 
         private static UserLogged GetUserByToken(string token)
@@ -54,21 +55,23 @@ namespace EAN.GPD.Domain.Utils
                 throw new ArgumentNullException(nameof(token));
             }
 
+            string tokenDecode = Encoding.UTF8.GetString(Convert.FromBase64String(token));
+
             char separador = ';';
-            if (token.Contains('.'))
+            if (tokenDecode.Contains('.'))
             {
                 separador = '.';
             }
-            else if (token.Contains(','))
+            else if (tokenDecode.Contains(','))
             {
                 separador = ',';
             }
-            else if (token.Contains('"'))
+            else if (tokenDecode.Contains('"'))
             {
                 separador = '"';
             }
 
-            string[] colunas = token.Split(separador);
+            string[] colunas = tokenDecode.Split(separador);
             return new UserLogged
             {
                 DataGeracaoToken = DateTime.ParseExact(colunas[2], "yyyyMMddHHmmssfff", CultureInfo.InvariantCulture),
