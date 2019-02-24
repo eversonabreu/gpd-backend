@@ -8,17 +8,15 @@ namespace EAN.GPD.Domain.Entities
 {
     public class BaseEntity
     {
-        private long? id;
         private readonly string nameTable;
 
         public BaseEntity(string nameTable, long? id = null)
         {
             this.nameTable = nameTable;
-            this.id = id;
 
-            if (id.HasValue)
+            if (id.HasValue && id.Value > 0)
             {
-                LoadObject();
+                LoadObject(id.Value);
             }
         }
 
@@ -26,13 +24,13 @@ namespace EAN.GPD.Domain.Entities
         public string GetNameSequence() => $"Seq{nameTable}";
         public string GetNamePrimaryKey() => $"Id{nameTable}";
 
-        private void LoadObject()
+        private void LoadObject(long id)
         {
-            var data = DatabaseProvider.GetAllById(nameTable, GetNamePrimaryKey(), id.Value).GetAll().FirstOrDefault();
+            var data = DatabaseProvider.GetAllById(nameTable, GetNamePrimaryKey(), id).GetAll().FirstOrDefault();
 
             if (data is null || !data.Any())
             {
-                throw new Exception($"No result for query by id in '{nameTable}' value id '{id.Value}'.");
+                throw new Exception($"No result for query by id in '{nameTable}' value id '{id}'.");
             }
 
             var props = GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -85,8 +83,14 @@ namespace EAN.GPD.Domain.Entities
                 var column = prop.GetCustomAttribute<Column>();
                 if (column != null)
                 {
-                    object value = prop.GetValue(this);
                     string name = column.Name ?? prop.Name;
+                    if (name == GetNamePrimaryKey())
+                    {
+                        continue;
+                    }
+
+                    object value = prop.GetValue(this);
+
                     if (prop.PropertyType == typeof(string))
                     {
                         if (value is null)
@@ -118,7 +122,7 @@ namespace EAN.GPD.Domain.Entities
                         }
                         else
                         {
-                            if (column.GetType() == typeof(bool))
+                            if (value.GetType() == typeof(bool))
                             {
                                 persistenceEntity.AddColumn(name, Convert.ToBoolean(value) ? 'S' : 'N');
                             }
@@ -132,7 +136,7 @@ namespace EAN.GPD.Domain.Entities
             }
         }
 
-        public long Save()
+        public long Save(long? id = null)
         {
             long result = id ?? GetSequence();
             

@@ -30,5 +30,38 @@ namespace EAN.GPD.Server.Controllers.V1
         {
             CodificarSenhaUsuario(model);
         }
+
+        public override UsuarioEntity GetOne(long id)
+        {
+            var result = base.GetOne(id);
+            result.SenhaLogin = Criptografia.Descodificar(result.SenhaLogin);
+            return result;
+        }
+
+        public override long Post([FromBody] UsuarioModel model)
+        {
+            try
+            {
+                return base.Post(model);
+            }
+            catch (Exception exc)
+            {
+                Console.Out.WriteLine(exc);
+                throw;
+            }
+        }
+
+        public override void Put([FromBody] UsuarioModel model)
+        {
+            try
+            {
+                base.Put(model);
+            }
+            catch (Exception exc)
+            {
+                Console.Out.WriteLine(exc);
+                throw;
+            }
+        }
     }
 }

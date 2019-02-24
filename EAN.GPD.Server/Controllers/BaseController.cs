@@ -68,10 +68,10 @@ namespace EAN.GPD.Server.Controllers
             }
 
             BeforePut(model);
-            TEntity oldEntity = GetOne(model.GetId().Value);
+            TEntity oldEntity = repository.GetOne(model.GetId().Value);
             string jsonEntity = JsonConvert.SerializeObject(oldEntity);
             TEntity entity = model.ToEntity<TEntity>();
-            entity.Save();
+            entity.Save(model.GetId().Value);
             Task.Run(() => repository.GenerateAuditAsync(TypeAudit.Update, entity.GetNameTable(), model.GetId().Value, userLogged, jsonEntity));
         }
 
@@ -80,7 +80,7 @@ namespace EAN.GPD.Server.Controllers
         public virtual void Delete(long id)
         {
             BeforeDelete(id);
-            TEntity oldEntity = GetOne(id);
+            TEntity oldEntity = repository.GetOne(id);
             string jsonEntity = JsonConvert.SerializeObject(oldEntity);
             BaseEntity.Delete<TEntity>(id);
             Task.Run(() => repository.GenerateAuditAsync(TypeAudit.Delete, oldEntity.GetNameTable(), id, userLogged, jsonEntity));
@@ -167,10 +167,11 @@ namespace EAN.GPD.Server.Controllers
         [Route("consulta")]
         public virtual ResultSet<TEntity> GetSearch(string conteudo, uint pagina = 0, uint quantidade = 10, string preFilter = null)
         {
-            if (string.IsNullOrWhiteSpace(conteudo) || conteudo.Trim().Length < 3)
-            {
-                throw new Exception("O termo de consulta deve ter no mínimo 3 (três) caracteres.");
-            }
+            if (string.IsNullOrWhiteSpace(conteudo))
+		    {
+                var resultAll = repository.Filter(pagina, quantidade, preFilter);
+                return new ResultSet<TEntity>(resultAll.Item1, resultAll.Item2);
+		    }
 
             var properties = typeof(TEntity).GetProperties(BindingFlags.Public | BindingFlags.Instance);
             var stringsExpressions = new List<string>();
